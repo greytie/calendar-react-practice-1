@@ -3,17 +3,26 @@
     Took from: https://css-tricks.com/accessible-simple-responsive-tables/
 */
 
+.month-header {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: calc(20px + 4.5vmin);
+    font-family: sans-serif
+}
+
 .month-container {
     max-width: 80%;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 3vh;
 }
 
+.day-of-week {
+    text-transform: uppercase;
+}
 
 .day-cell {
     min-height: 5vh;
 }
-
 
 .day-number {
     display: flex;
