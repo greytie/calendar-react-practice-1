@@ -18,10 +18,12 @@
 
 .day-of-week {
     text-transform: uppercase;
+    padding-top: 2px;
+    padding-bottom: 1px;
 }
 
 .day-cell {
-    min-height: 5vh;
+    min-height: 10vh;
 }
 
 .day-number {

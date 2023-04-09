@@ -33,7 +33,6 @@ export const Calendar = () => {
     );
 };
 
-
 const DayCell = ( { day } ) => {
     return (
         <div className="Rtable-cell day-cell">
