@@ -19,11 +19,25 @@ export const Calendar = () => {
                 daysOfWeek.map((x, idx) => <div key={idx} className="Rtable-cell">{x}</div>)
             }
             {
-                days.map((x, idx) => <div key={idx + 7} className="Rtable-cell">{x}</div>)
+                days.map((x, idx) => <DayCell key={idx + 7} day={x}></DayCell>)
             }
             {
-                appendedCells.map((x, idx) => <div key={idx + 37} className="Rtable-cell"></div>)
+                appendedCells.map((x, idx) => <div key={idx + 37} className="Rtable-cell day-cell"></div>)
             }
         </div>
     );
 };
+
+
+const DayCell = ( { day } ) => {
+    return (
+        <div className="Rtable-cell day-cell">
+            <div className="day-number">
+                <span>{day}</span>
+            </div>
+            <div className="day-content">
+                
+            </div>
+        </div>
+    )
+}

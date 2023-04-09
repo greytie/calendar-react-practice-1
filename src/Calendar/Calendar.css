@@ -10,6 +10,23 @@
 }
 
 
+.day-cell {
+    min-height: 5vh;
+}
+
+
+.day-number {
+    display: flex;
+    justify-content: start;
+    padding-left: 4px;
+    padding-top: 2px;
+}
+
+.day-content {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
 .Rtable {
     display: flex;
     flex-wrap: wrap;
@@ -21,7 +38,7 @@
     box-sizing: border-box;
     flex-grow: 1;
     width: 100%;  
-    padding: 0.8em 1.2em;
+    /* padding: 0.8em 1.2em; */
     overflow: hidden; 
     list-style: none;
     border: solid 1px black;
