@@ -15,8 +15,9 @@ export const Calendar = () => {
 
     return (
         <>
-            <div className="month-header">
-                dec
+            <div className="date-header">
+                <div className="month-header">dec</div>
+                <div className="year-header">2023</div>
             </div>
             <div className="month-container Rtable Rtable--7cols">
                 {

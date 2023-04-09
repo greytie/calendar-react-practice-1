@@ -3,11 +3,16 @@
     Took from: https://css-tricks.com/accessible-simple-responsive-tables/
 */
 
-.month-header {
+.date-header {
     text-transform: uppercase;
     font-weight: 600;
     font-size: calc(20px + 4.5vmin);
     font-family: sans-serif
+}
+
+.year-header {
+    font-size: calc(20px + 2.5vmin);
+    color: #5A5A5A;
 }
 
 .month-container {
