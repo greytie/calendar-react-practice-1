@@ -1,5 +1,5 @@
 import './Calendar.css'
-import { getMonthOffsets, getNumberOfDaysForMonth } from './../lib/date-helpers'
+import { getMonthOffsets, getNumberOfDaysForMonth } from '../lib/date-helpers'
 
 const daysOfWeek = [
     "Sun",
