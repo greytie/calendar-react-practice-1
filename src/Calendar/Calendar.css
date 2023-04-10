@@ -4,14 +4,14 @@
 */
 
 .date-header {
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
-    font-size: calc(20px + 4.5vmin);
+    font-size: calc(20px + 4vmin);
     font-family: sans-serif
 }
 
 .year-header {
-    font-size: calc(20px + 2.5vmin);
+    font-size: calc(20px + 2vmin);
     color: #5A5A5A;
 }
 
