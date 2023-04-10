@@ -26,3 +26,8 @@ export const getMonthOffsets = (year, month) => {
         append: MAX_CELL_COUNT_IN_MONTH - (dayOfWeek + numberOfDaysInMonth)
     }
 }
+
+export const getNumberOfDaysForMonth = (year, month) => {
+    const dateObj = new Date(year, month - 1);
+    return getDaysInMonth(dateObj);
+}
