@@ -28,8 +28,14 @@ const monthsInYear = [
 
 export const Calendar = () => {
     const today = new Date();
-    const monthOffsets = getMonthOffsets(today.getFullYear(), today.getMonth() + 1);
-    const numberOfDaysInMonth = getNumberOfDaysForMonth(today.getFullYear(), today.getMonth() + 1)
+    return (
+        <Month date={ today }></Month>
+    );
+};
+
+const Month = ({ date }) => {
+    const monthOffsets = getMonthOffsets(date.getFullYear(), date.getMonth() + 1);
+    const numberOfDaysInMonth = getNumberOfDaysForMonth(date.getFullYear(), date.getMonth() + 1)
 
     const days = Array.from({length: numberOfDaysInMonth}, (x, i) => i + 1)
     const prependedCells = Array.from({length: monthOffsets.prepend}, (x, i) => i + 1)
@@ -38,8 +44,8 @@ export const Calendar = () => {
     return (
         <>
             <div className="date-header">
-                <div className="month-header">{ monthsInYear[today.getMonth()] }</div>
-                <div className="year-header">{ today.getFullYear() }</div>
+                <div className="month-header">{ monthsInYear[date.getMonth()] }</div>
+                <div className="year-header">{ date.getFullYear() }</div>
             </div>
             <div className="month-container Rtable Rtable--7cols">
                 {
@@ -57,7 +63,7 @@ export const Calendar = () => {
             </div>
         </>
     );
-};
+}
 
 const DayCell = ( { day } ) => {
     return (
