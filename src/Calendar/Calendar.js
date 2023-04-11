@@ -1,5 +1,9 @@
+import React from 'react'
 import './Calendar.css'
-import { getMonthOffsets, getNumberOfDaysForMonth } from '../lib/date-helpers'
+import { 
+    getMonthOffsets, 
+    getNumberOfDaysForMonth, 
+    addMonth } from '../lib/date-helpers'
 import { IonIcon } from '@ionic/react'
 import {
 	chevronBackOutline,
@@ -39,8 +43,14 @@ export const Calendar = () => {
 };
 
 const Month = ({ date }) => {
-    const monthOffsets = getMonthOffsets(date.getFullYear(), date.getMonth() + 1);
-    const numberOfDaysInMonth = getNumberOfDaysForMonth(date.getFullYear(), date.getMonth() + 1)
+    const [dateStore, setDateStore] = React.useState(date)
+
+    const changeMonth = (monthChange)  => {
+        setDateStore(addMonth(dateStore, monthChange))
+    }
+    
+    const monthOffsets = getMonthOffsets(dateStore.getFullYear(), dateStore.getMonth() + 1);
+    const numberOfDaysInMonth = getNumberOfDaysForMonth(dateStore.getFullYear(), dateStore.getMonth() + 1)
 
     const days = Array.from({length: numberOfDaysInMonth}, (x, i) => i + 1)
     const prependedCells = Array.from({length: monthOffsets.prepend}, (x, i) => i + 1)
@@ -50,14 +60,14 @@ const Month = ({ date }) => {
         <>
             <div className="date-controls">
                 <div className="control-arrow">
-                    <IonIcon className="month-navigate-btn" icon={chevronBackOutline}></IonIcon>
+                    <IonIcon onClick={ () => changeMonth(-1) } className="month-navigate-btn" icon={chevronBackOutline}></IonIcon>
                 </div>
                 <div className="date-header">
-                    <div className="month-header">{ monthsInYear[date.getMonth()] }</div>
-                    <div className="year-header">{ date.getFullYear() }</div>
+                    <div className="month-header">{ monthsInYear[dateStore.getMonth()] }</div>
+                    <div className="year-header">{ dateStore.getFullYear() }</div>
                 </div>
                 <div className="control-arrow">
-                    <IonIcon className="month-navigate-btn" icon={chevronForwardOutline}></IonIcon>    
+                    <IonIcon onClick={ () => changeMonth(1) } className="month-navigate-btn" icon={chevronForwardOutline}></IonIcon>    
                 </div>
             </div>
             <div className="month-container Rtable Rtable--7cols">
