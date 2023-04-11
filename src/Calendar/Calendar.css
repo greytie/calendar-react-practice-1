@@ -19,8 +19,7 @@
     font-weight: 600;
     font-size: calc(20px + 4vmin);
     font-family: sans-serif;
-    margin-left: 40px;
-    margin-right: 40px;
+    min-width: 25%;
 }
 
 .year-header {
