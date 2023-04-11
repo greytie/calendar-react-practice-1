@@ -1,13 +1,26 @@
-/*
-    Responsive table.
-    Took from: https://css-tricks.com/accessible-simple-responsive-tables/
-*/
+.date-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.control-arrow {
+    font-size: calc(20px + 2.5vmin);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.month-navigate-btn {
+    cursor: pointer;
+}
 
 .date-header {
     text-transform: capitalize;
     font-weight: 600;
     font-size: calc(20px + 4vmin);
-    font-family: sans-serif
+    font-family: sans-serif;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .year-header {
@@ -42,6 +55,11 @@
     padding-top: 2px;
     padding-bottom: 2px;
 }
+
+/*
+    Responsive table.
+    Took from: https://css-tricks.com/accessible-simple-responsive-tables/
+*/
 
 .Rtable {
     display: flex;

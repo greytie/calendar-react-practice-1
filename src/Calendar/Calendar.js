@@ -1,5 +1,10 @@
 import './Calendar.css'
 import { getMonthOffsets, getNumberOfDaysForMonth } from '../lib/date-helpers'
+import { IonIcon } from '@ionic/react'
+import {
+	chevronBackOutline,
+	chevronForwardOutline,
+} from 'ionicons/icons'
 
 const daysOfWeek = [
     "Sun",
@@ -43,9 +48,17 @@ const Month = ({ date }) => {
 
     return (
         <>
-            <div className="date-header">
-                <div className="month-header">{ monthsInYear[date.getMonth()] }</div>
-                <div className="year-header">{ date.getFullYear() }</div>
+            <div className="date-controls">
+                <div className="control-arrow">
+                    <IonIcon className="month-navigate-btn" icon={chevronBackOutline}></IonIcon>
+                </div>
+                <div className="date-header">
+                    <div className="month-header">{ monthsInYear[date.getMonth()] }</div>
+                    <div className="year-header">{ date.getFullYear() }</div>
+                </div>
+                <div className="control-arrow">
+                    <IonIcon className="month-navigate-btn" icon={chevronForwardOutline}></IonIcon>    
+                </div>
             </div>
             <div className="month-container Rtable Rtable--7cols">
                 {
