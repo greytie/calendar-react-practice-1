@@ -52,9 +52,9 @@ const Month = ({ date }) => {
     const monthOffsets = getMonthOffsets(dateStore.getFullYear(), dateStore.getMonth() + 1);
     const numberOfDaysInMonth = getNumberOfDaysForMonth(dateStore.getFullYear(), dateStore.getMonth() + 1)
 
-    const days = Array.from({length: numberOfDaysInMonth}, (x, i) => i + 1)
-    const prependedCells = Array.from({length: monthOffsets.prepend}, (x, i) => i + 1)
-    const appendedCells = Array.from({length: monthOffsets.append}, (x, i) => i + 1)
+    const currentMonthDays = Array.from({length: numberOfDaysInMonth}, (x, i) => i + 1)
+    const previousMonthDays = Array.from({length: monthOffsets.prepend}, (x, i) => i + 1)
+    const nextMonthDays = Array.from({length: monthOffsets.append}, (x, i) => i + 1)
 
     return (
         <>
@@ -75,13 +75,13 @@ const Month = ({ date }) => {
                     daysOfWeek.map((x, idx) => <div key={idx} className="day-of-week Rtable-cell">{x}</div>)
                 }
                 {
-                    prependedCells.map((x, idx) => <div key={idx + 7} className="Rtable-cell day-cell"></div>)
+                    previousMonthDays.map((x, idx) => <DayCell key={idx + 7} className="Rtable-cell"></DayCell>)
                 }
                 {
-                    days.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend} day={x}></DayCell>)
+                    currentMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend} day={x}></DayCell>)
                 }
                 {
-                    appendedCells.map((x, idx) => <div key={idx + 7 + monthOffsets.prepend + days.length} className="Rtable-cell day-cell"></div>)
+                    nextMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend + currentMonthDays.length} className="Rtable-cell"></DayCell>)
                 }
             </div>
         </>
