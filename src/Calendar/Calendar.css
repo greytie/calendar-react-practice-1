@@ -50,6 +50,22 @@
     padding-top: 2px;
 }
 
+.work-day-color {
+    color: black;
+}
+
+.off-day-color {
+    color: #FF2E2E;
+}
+
+.other-month-off-day-color {
+    color: #ffcccb;
+}
+
+.other-month-work-day-color {
+    color: #d3d3d3;
+}
+
 .day-content {
     padding-top: 2px;
     padding-bottom: 2px;

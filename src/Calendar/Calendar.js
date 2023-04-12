@@ -3,12 +3,15 @@ import './Calendar.css'
 import { 
     getMonthOffsets, 
     getNumberOfDaysForMonth, 
+    getDatesInRange, 
+    addDays, 
     addMonth } from '../lib/date-helpers'
 import { IonIcon } from '@ionic/react'
 import {
 	chevronBackOutline,
 	chevronForwardOutline,
 } from 'ionicons/icons'
+import { isSunday } from 'date-fns'
 
 const daysOfWeek = [
     "Sun",
@@ -42,19 +45,23 @@ export const Calendar = () => {
     );
 };
 
-const Month = ({ date }) => {
-    const [dateStore, setDateStore] = React.useState(date)
+const Month = ({ date: initalDate }) => {
+    const [currentDate, setDateStore] = React.useState(initalDate)
 
     const changeMonth = (monthChange)  => {
-        setDateStore(addMonth(dateStore, monthChange))
+        setDateStore(addMonth(currentDate, monthChange))
     }
     
-    const monthOffsets = getMonthOffsets(dateStore.getFullYear(), dateStore.getMonth() + 1);
-    const numberOfDaysInMonth = getNumberOfDaysForMonth(dateStore.getFullYear(), dateStore.getMonth() + 1)
+    const { prepend, append } = getMonthOffsets(currentDate.getFullYear(), currentDate.getMonth() + 1);
+    const numberOfDaysInMonth = getNumberOfDaysForMonth(currentDate.getFullYear(), currentDate.getMonth() + 1)
 
-    const currentMonthDays = Array.from({length: numberOfDaysInMonth}, (x, i) => i + 1)
-    const previousMonthDays = Array.from({length: monthOffsets.prepend}, (x, i) => i + 1)
-    const nextMonthDays = Array.from({length: monthOffsets.append}, (x, i) => i + 1)
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+
+    // Get days for previous month
+    const prevMonthDates = getDatesInRange(addDays(firstDayOfMonth, -prepend), prepend)
+    const currentMonthDates = getDatesInRange(firstDayOfMonth, numberOfDaysInMonth)
+    const nextMonthDates = getDatesInRange(addDays(firstDayOfMonth, numberOfDaysInMonth), append)
+    const allDays = [...prevMonthDates, ...currentMonthDates, ...nextMonthDates]
 
     return (
         <>
@@ -63,8 +70,8 @@ const Month = ({ date }) => {
                     <IonIcon onClick={ () => changeMonth(-1) } className="month-navigate-btn" icon={chevronBackOutline}></IonIcon>
                 </div>
                 <div className="date-header">
-                    <div className="month-header">{ monthsInYear[dateStore.getMonth()] }</div>
-                    <div className="year-header">{ dateStore.getFullYear() }</div>
+                    <div className="month-header">{ monthsInYear[currentDate.getMonth()] }</div>
+                    <div className="year-header">{ currentDate.getFullYear() }</div>
                 </div>
                 <div className="control-arrow">
                     <IonIcon onClick={ () => changeMonth(1) } className="month-navigate-btn" icon={chevronForwardOutline}></IonIcon>    
@@ -75,28 +82,45 @@ const Month = ({ date }) => {
                     daysOfWeek.map((x, idx) => <div key={idx} className="day-of-week Rtable-cell">{x}</div>)
                 }
                 {
-                    previousMonthDays.map((x, idx) => <DayCell key={idx + 7}></DayCell>)
-                }
-                {
-                    currentMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend} day={x}></DayCell>)
-                }
-                {
-                    nextMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend + currentMonthDays.length}></DayCell>)
+                    allDays.map((date, idx) => <DayCell key={idx + 7} date={date} currentMonthIndex={ currentDate.getMonth() }></DayCell>)
                 }
             </div>
         </>
     );
 }
 
-const DayCell = ( { day } ) => {
+/**
+ * 
+ * @param {{ date: Date }}} param0 
+ * @returns 
+ */
+const DayCell = ( { date, currentMonthIndex } ) => {
+    const isCurrentMonth = date.getMonth() === currentMonthIndex;
+    const isDateSunday = isSunday(date);
+
     return (
         <div className="Rtable-cell day-cell">
-            <div className="day-number">
-                <span>{day}</span>
+            <div className={`day-number ${getDateColor(isCurrentMonth, isDateSunday)}`}>
+                <span>{date.getDate()}</span>
             </div>
             <div className="day-content">
                 
             </div>
         </div>
     )
+}
+
+const getDateColor = (isCurrentMonth, isDateSunday) => {
+    if (isCurrentMonth) {
+        if (isDateSunday) {
+            return "off-day-color"
+        }
+        return "work-day-color"
+    }
+    else {
+        if (isDateSunday) {
+            return "other-month-off-day-color"
+        }
+        return "other-month-work-day-color"
+    }
 }

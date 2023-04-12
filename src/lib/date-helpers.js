@@ -1,4 +1,4 @@
-import { getDay, getDaysInMonth, add  } from 'date-fns'
+import { getDay, getDaysInMonth, add } from 'date-fns'
 
 const MAX_CELL_COUNT_IN_MONTH = 42;
 
@@ -39,4 +39,41 @@ export const getNumberOfDaysForMonth = (year, month) => {
  */
 export const addMonth = (date, monthOffset) => {
     return add(date, { months: monthOffset })
+}
+
+/**
+ * 
+ * @param {*} date 
+ * @param {*} increment 
+ * @returns 
+ */
+export const addDays = (date, increment) => {
+    return add(date, { days: increment })
+}
+ 
+
+export const getAllDatesInMonth = (year, month) => {
+    const dateObj = new Date(year, month - 1);
+    const numberOfDaysInMonth = getDaysInMonth(dateObj);
+    const dates = []
+    for (let i = 0; i < numberOfDaysInMonth; i++) {
+        dates.push(add(dateObj, { day: i + 1}))
+    }
+
+    return dates;
+}
+
+/**
+ * 
+ * @param {Date} date 
+ * @param {number} range 
+ * @returns 
+ */
+export const getDatesInRange = (date, range) => {
+    const dates = []
+    for (let i = 0; i < range; i++) {
+        dates.push(add(date, { days: i}))
+    }
+
+    return dates;
 }
