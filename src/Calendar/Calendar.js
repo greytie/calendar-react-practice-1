@@ -75,13 +75,13 @@ const Month = ({ date }) => {
                     daysOfWeek.map((x, idx) => <div key={idx} className="day-of-week Rtable-cell">{x}</div>)
                 }
                 {
-                    previousMonthDays.map((x, idx) => <DayCell key={idx + 7} className="Rtable-cell"></DayCell>)
+                    previousMonthDays.map((x, idx) => <DayCell key={idx + 7}></DayCell>)
                 }
                 {
                     currentMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend} day={x}></DayCell>)
                 }
                 {
-                    nextMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend + currentMonthDays.length} className="Rtable-cell"></DayCell>)
+                    nextMonthDays.map((x, idx) => <DayCell key={idx + 7 + monthOffsets.prepend + currentMonthDays.length}></DayCell>)
                 }
             </div>
         </>
