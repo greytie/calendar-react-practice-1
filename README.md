@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# calendar-react-practice-1
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple calendar app. Does nothing other than display a simple calendar. Less useful than a physical calendar, which you can at least you can write on and don't need to host.
+
+Built using:
+- React JS (create-react-app)
+- ionicons
+- date-fns
+
+
 
 ## Available Scripts
 
